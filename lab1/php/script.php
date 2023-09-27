@@ -40,16 +40,33 @@ function checkCoordinates($x, $y, $r)
 }
 
 foreach ($_SESSION["tdata"] as $rdata) {
-   echo <<<HTML
-   <tr>
-       <td>$rdata[0]</td>
-       <td>$rdata[1]</td>
-       <td>$rdata[2]</td>
-       <td>$rdata[3]</td>
-       <td>$rdata[4]</td>
-       <td>$rdata[5]</td>
-   </tr>
-HTML;
+   if ($rdata[5] == "Yes") {
+      echo <<<HTML
+      <tr style="color: green;">
+          <td>$rdata[0]</td>
+          <td>$rdata[1]</td>
+          <td>$rdata[2]</td>
+          <td>$rdata[3]</td>
+          <td>$rdata[4]</td>
+          <td>$rdata[5]</td>
+      </tr>
+   HTML;
+   } else {
+      echo <<<HTML
+      <tr style="color: red;">
+          <td>$rdata[0]</td>
+          <td>$rdata[1]</td>
+          <td>$rdata[2]</td>
+          <td>$rdata[3]</td>
+          <td>$rdata[4]</td>
+          <td>$rdata[5]</td>
+      </tr>
+   HTML;
+   }
+
+
+
+
 }
 
 ?>
