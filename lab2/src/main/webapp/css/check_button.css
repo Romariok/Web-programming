@@ -1,0 +1,60 @@
+/* Идентификаторы */
+#submitButton,
+#clearButton {
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 2px;
+    position: relative;
+    background-color: #999BA9;
+    border: none;
+    color: white;
+    padding: 15px;
+    width: 120px;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    box-shadow: 0 5px 15px #193047;
+    border-radius: 4px;
+}
+
+#submitButton:hover,
+#clearButton:hover {
+    background: white;
+    box-shadow: 0 2px 10px 5px #999BA9;
+    color: black;
+}
+
+#submitButton::after,
+#clearButton::after {
+    content: "";
+    background: #999BA9;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+#submitButton:active::after,
+#clearButton:active::after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+#submitButton:focus,
+#clearButton:focus {
+    outline: 0;
+}
+
+#submitButton {
+    margin-right: 10px;
+}
+
+#clearButton {
+    margin-left: 10px;
+}
