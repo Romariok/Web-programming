@@ -5,14 +5,24 @@ let r, x ,y;
 let graph_values = document.getElementsByClassName("graph_value");
 
 
-const buttons = document.querySelectorAll('.button-X');
-buttons.forEach((g) => {
-   g.addEventListener("click", (e) => {
-      let element = e.target;
-      x = `${element.innerText}`;
-   });
-});
+document.addEventListener("DOMContentLoaded", () => {
+   let buttons = document.querySelectorAll(".button-X");
+   buttons.forEach(click);
 
+   function click(element) {
+      element.onclick = function () {
+         x = this.value;
+         buttons.forEach(function (element) {
+            element.style.boxShadow = null;
+            element.style.backgroundColor = null;
+            element.style.color = null;
+         });
+         this.style.boxShadow = "0 0 20px 5px #999BA9";
+         this.style.backgroundColor = "#9CAFA4";
+         // this.style.color = "white";
+      }
+   }
+});
 
 function createNotification(message) {
    let outputContainer = document.getElementById("outputContainer");
