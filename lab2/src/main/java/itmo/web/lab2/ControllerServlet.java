@@ -13,17 +13,17 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("clear") != null && Objects.equals(req.getServletContext().getRequestDispatcher("clear"), "true"))  req.getServletContext().getRequestDispatcher("/clear").forward(req, resp);
+        if (req.getParameter("clear") != null && Objects.equals(req.getRequestDispatcher("clear"), "true"))  req.getRequestDispatcher("/clear").forward(req, resp);
         else if (req.getParameter("x") != null && req.getParameter("y") != null && req.getParameter("r") != null)
-            req.getServletContext().getRequestDispatcher("/checker").forward(req, resp);
+            req.getRequestDispatcher("/checker").forward(req, resp);
         else {
             req.setAttribute("message", "Ошибка: переданы не все параметры!");
-            req.getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getServletContext().getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
 
     }
 }

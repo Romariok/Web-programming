@@ -57,6 +57,8 @@ const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
    checkbox.addEventListener('click', () => {
       r = `${checkbox.value}`;
+      let pointer = document.getElementById("pointer");
+      pointer.style.visibility = "hidden";
       for (let index = 0; index < graph_values.length; index++) {
          graph_values[index].textContent =r;
       }
@@ -142,8 +144,7 @@ document.getElementById("clearButton").onclick = function (){
       clear: "true"
    };
    fetch("app"+formatParams(params), {
-      method:"get",
-      headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
+      method:"get"
    }).then(response => response.text()).then(function (serverAnswer) {
       document.getElementById("main__table-block").innerHTML = serverAnswer;
       createNotification("Таблица очищена");

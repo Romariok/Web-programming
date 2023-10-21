@@ -62,8 +62,8 @@
         <polygon points="150,150 150,30 90, 150" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>
         <%--CIRCLE--%>
         <path d="M150 150 L 210 150 C 210 150 210 90 150 90 L Z" fill-opacity="0.4" stroke="navy" fill="blue"></path>
-        <%--        <circle id="pointer" r="5" cx="150" cy="150" fill-opacity="0.7" fill="red" stroke="firebrick"--%>
-        <%--        ></circle>--%>
+                <circle id="pointer" r="5" cx="150" cy="150" fill-opacity="0.7" fill="red" stroke="firebrick" visibility="hidden"
+                ></circle>
 
     </svg>
 
