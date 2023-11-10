@@ -13,7 +13,6 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         long startTime = System.nanoTime();
-
         HttpSession session = req.getSession();
         resp.setContentType("text/html;charset=UTF-8");
         List tableRows = (List) session.getAttribute("tableRows");

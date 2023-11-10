@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+
+
+<ui:composition template="templates/template_layout.xhtml">
+
+    <ui:define name="head">
+        <title>Лабораторная №3 - часы</title>
+        <meta name="description" content="Лабораторная работа №3 по дисциплине веб-программирование - страница с часами"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="clock">
+            <h:outputText id="my-clock" value="#{timeCharger.time}"/>
+            <p:poll interval="13" update="my-clock" listener="#{timeCharger.updateTime}"/>
+        </h:form>
+
+        <h:button id="approveButton" outcome="main" style="width: 150px" value="Начать!"/>
+    </ui:define>
+
+</ui:composition>
+
+</html>

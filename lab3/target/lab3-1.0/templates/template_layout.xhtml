@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head>
+    <!--        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>-->
+    <!--        <meta name="author" content="Кобелев Роман Павлович P3212"/>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/jpg" href="#{resource['img/favicon.ico']}"/>
+    <h:outputStylesheet library="css" name="main_page.css"/>
+    <h:outputStylesheet library="css" name="check_button.css"/>
+    <ui:insert name="head">
+        Побочные meta-теги
+    </ui:insert>
+</h:head>
+<h:body>
+    <div class="wraper">
+        <div class="header">
+            <header>
+                <ui:include src="template_header.xhtml"/>
+            </header>
+        </div>
+
+        <div id="content">
+            <ui:insert name="content">
+                Содержимое страницы
+            </ui:insert>
+        </div>
+    </div>
+</h:body>
+
+
+</html>

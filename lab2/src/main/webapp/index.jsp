@@ -13,7 +13,6 @@
     <link href="css/check_button.css" rel="stylesheet">
     <title> Лабораторная No 2</title>
 </head>
-
 <body>
 
 <header>
@@ -70,7 +69,12 @@
 </div>
 
 <div class="input_area">
-
+        <%@
+            
+        %>
+    
+    
+        
         <div class="button_area">
             <label>Изменение X</label>
             <br>
