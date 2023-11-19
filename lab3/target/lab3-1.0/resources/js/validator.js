@@ -1,7 +1,11 @@
-let r, x, y;
-let xValid = false, yValid = false, rValid = false;
-
+let rValid = false, xValid = false, yValid = false;
 let graph_values = document.querySelectorAll(".graph_value");
+
+const submitBtn = document.getElementById('form:submitButton');
+
+function toggleSubmitBtn() {
+    submitBtn.disabled = !(xValid && rValid && yValid);
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function click(element) {
         element.onclick = function () {
-            x = this.value;
             buttons.forEach(function (element) {
                 element.style.boxShadow = null;
                 element.style.backgroundColor = null;
@@ -20,88 +23,78 @@ document.addEventListener("DOMContentLoaded", () => {
             this.style.backgroundColor = "#9CAFA4";
         }
     }
+
+    toggleSubmitBtn();
 });
+
+
+let xInput = document.getElementById("form:X");
+const checkboxes = document.querySelectorAll('.checkboxes input[type="checkbox"]');
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', () => {
+        xInput.value = `${checkbox.value}`;
+        xValid = true;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false;
+            }
+        }
+        toggleSubmitBtn();
+    });
+});
+
+let rInput;
+
 function reactToChangeRRadio(param) {
-    r = param;
+    rInput = param;
+    rValid = true;
     let pointer = document.getElementById("pointer");
     pointer.style.visibility = "hidden";
     for (let index = 0; index < graph_values.length; index++) {
-        graph_values[index].textContent = r;
+        graph_values[index].textContent = rInput;
     }
-}
-
-const submitBtn = document.getElementById('form:submitButton');
-document.getElementById("submitButton").onclick = function () {
-    if (validateY() && validateR() && validateX()) {
-        setPointer(x, y);
-    }
-};
-
-
-function updateCheckboxes(clickedCheckbox, value) {
-    x = value;
-    var checkboxes = document.querySelectorAll('.checkboxes input[type="checkbox"]');
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i] !== clickedCheckbox) {
-            checkboxes[i].checked = false;
-        }
-    }
+    toggleSubmitBtn();
 }
 
 
+function updateGraph() {
+    createNotification("Результат отображён", false)
+    setPointer(xInput.value, yInput.value);
+}
 
-function validateR() {
-    if ((!isNumeric(r))) {
-        createNotification("R - не число ");
-        return false;
-    } else if (!((r >= 1) && (r <= 3))) {
-        createNotification("R - не входит в диапозон");
-        return false;
+
+let yInput = document.getElementById('form:Y');
+yInput.addEventListener('input', () => {
+    if (yInput.value === undefined) {
+        createNotification("Y не введён", true);
+        yValid = false;
+    } else if ((!isNumeric(yInput.value))) {
+        createNotification("Y - не число ", true);
+        yValid = false;
+    } else if (!((yInput.value >= -5) && (yInput.value <= 3))) {
+        createNotification("Y - не входит в диапозон", true);
+        yValid = false;
     } else {
-        return true;
+        yValid = true;
     }
-}
-
-function validateY() {
-    y = document.querySelector(".textY").value.replace(",", ".");
-    if (y === undefined) {
-        createNotification("Y не введён");
-        return false;
-    } else if ((!isNumeric(y))) {
-        createNotification("Y - не число ");
-        return false;
-    } else if (!((y >= -5) && (y <= 3))) {
-        createNotification("Y - не входит в диапозон");
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function validateX() {
-    if ((!isNumeric(x))) {
-        createNotification("X - не число ");
-        return false;
-    } else if (!((x >= -4) && (x <= 4))) {
-        createNotification("X - не входит в диапозон");
-        return false;
-    } else {
-        return true;
-    }
-
-}
-
+    toggleSubmitBtn();
+})
 
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function createNotification(message) {
+function createNotification(message, error) {
     let outputContainer = document.getElementById("outputContainer");
+
     if (outputContainer.contains(document.querySelector(".notification"))) {
         let stub = document.querySelector(".notification");
         stub.textContent = message;
-        stub.classList.replace("outputStub", "errorStub");
+        if (!error) {
+            stub.classList.replace("errorStub", "outputStub");
+        } else {
+            stub.classList.replace("outputStub", "errorStub");
+        }
     } else {
         let notificationTableRow = document.createElement("h4");
         notificationTableRow.innerHTML = "<span class='notification errorStub'></span>";
@@ -110,3 +103,6 @@ function createNotification(message) {
         span.textContent = message;
     }
 }
+
+yInput.value = '';
+toggleSubmitBtn()

@@ -78,47 +78,26 @@
             </svg>
 
         </div>
-        <h:form id="input__form">
+        <h:form id="form">
             <div class="checkboxes">
-                <label>Изменение X</label>
-                <!--                <h:inputHidden id="X" name="x" value="#{myBean.currPoint.x1}">-->
-                <!--                    <f:validator validatorId="validatorX"/>-->
-                <!--                </h:inputHidden>-->
-                <h:selectBooleanCheckbox itemLabel="-4" itemValue="-4" onclick="updateCheckboxes(this, -4)"
-                                         value="#{myBean.currPoint.x_4}"/> -4
-                <h:selectBooleanCheckbox itemLabel="-3" itemValue="-3" onclick="updateCheckboxes(this, -3)"
-                                         value="#{myBean.currPoint.x_3}"/> -3
-                <h:selectBooleanCheckbox itemLabel="-2" itemValue="-2" onclick="updateCheckboxes(this, -2)"
-                                         value="#{myBean.currPoint.x_2}"/> -2
-                <h:selectBooleanCheckbox itemLabel="-1" itemValue="-1" onclick="updateCheckboxes(this, -1)"
-                                         value="#{myBean.currPoint.x_1}"/> -1
-                <h:selectBooleanCheckbox itemLabel="0" itemValue="0" onclick="updateCheckboxes(this, 0)"
-                                         value="#{myBean.currPoint.x0}"/> 0
-                <h:selectBooleanCheckbox itemLabel="1" itemValue="1" onclick="updateCheckboxes(this, 1)"
-                                         value="#{myBean.currPoint.x1}"/> 1
-                <h:selectBooleanCheckbox itemLabel="2" itemValue="2" onclick="updateCheckboxes(this, 2)"
-                                         value="#{myBean.currPoint.x2}"/> 2
-                <h:selectBooleanCheckbox itemLabel="3" itemValue="3" onclick="updateCheckboxes(this, 3)"
-                                         value="#{myBean.currPoint.x3}"/> 3
-                <h:selectBooleanCheckbox itemLabel="4" itemValue="4" onclick="updateCheckboxes(this, 4)"
-                                         value="#{myBean.currPoint.x4}"/> 4
+                <label for="X">Изменение X</label>
+                <h:inputHidden id="X" name="x" value="#{myBean.currPoint.x}"/>
+                <h:selectManyCheckbox id="X-check" value="#{myBean.selectedItems}" valueChangeListener="#{myBean.handleSelectionChange}">
+                    <f:selectItems value="#{myBean.availableItems}" var="item" itemValue="#{item}" itemLabel="#{item}" />
+                </h:selectManyCheckbox>
             </div>
 
 
             <div class="text_area">
-                <label>Изменение Y</label>
-                <p:inputText type="number" id="textY" class="textY" name="y" placeholder="-5 до 3" maxlength="15"
+                <label for="Y">Изменение Y</label>
+                <p:inputText type="number" required="required" id="Y" placeholder="-5 до 3" maxlength="15"
                              value="#{myBean.currPoint.y}">
-<!--                                    <f:validator validatorId="validatorY"/>-->
                 </p:inputText>
             </div>
 
             <div class="radio_buttons">
                 <label>Изменение R</label>
-<!--                            <h:inputHidden id="R" name="r" value="#{myBean.currPoint.r}">-->
-<!--                                <f:validator validatorId="validatorR"/>-->
-<!--                            </h:inputHidden>-->
-                <h:selectOneRadio onchange="reactToChangeRRadio(this.value)" value="#{myBean.currPoint.r}">
+                <h:selectOneRadio  value="#{myBean.currPoint.r}" id="R" onchange="reactToChangeRRadio(this.value)">
                     <f:selectItem itemLabel="1" itemValue="1"/>
                     <f:selectItem itemLabel="1.5" itemValue="1.5"/>
                     <f:selectItem itemLabel="2" itemValue="2"/>
@@ -129,16 +108,22 @@
 
             <div class="Buttons">
                 <p:commandButton type="submit" name="sendRequest" id="submitButton" update="main__table"
+                                 styleClass="submitButton" oncomplete="updateGraph();"
                                  action="#{myBean.addResult}" value="Проверить"/>
+                <p:commandButton id="clearButton" value="Очистить" styleClass="clearButton"
+                                 action="#{myBean.clearResults}" immediate="true" update="main__table"/>
             </div>
         </h:form>
         <div id="outputContainer">
+            <p:messages id="messages" showSummary="false" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
             <h4><span class="outputStub notification">Результаты отсутствуют</span></h4>
         </div>
         <div class="main__table-block">
             <p:dataTable id="main__table" var="p" value="#{myBean.points}">
                 <p:column headerText="X">
-                    <h:outputText value="#{p.calculateValue(p.x1,p.x2,p.x3,p.x4,p.x_1,p.x_2,p.x_3,p.x_4,p.x0)}"/>
+                    <h:outputText value="#{p.x}"/>
                 </p:column>
                 <p:column headerText="Y">
                     <h:outputText value="#{p.y}"/>

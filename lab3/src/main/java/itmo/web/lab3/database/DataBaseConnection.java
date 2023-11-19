@@ -27,6 +27,20 @@ public class DataBaseConnection implements DataBase{
         }
     }
     @Override
+    public boolean clear() {
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.createQuery("delete from Point").executeUpdate();
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }
+    }
+
+    @Override
     public List<Point> getAll() {
         return entityManager.createQuery("SELECT p FROM Point p", Point.class).setMaxResults(50).getResultList();
     }

@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface DataBase {
     void save(Point point);
-
+    boolean clear();
     List<Point> getAll();
 }
