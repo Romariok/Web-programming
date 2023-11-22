@@ -1,17 +1,19 @@
 let svg = document.querySelector("svg");
-
+let graph = false
+let xOld, yOld;
 document.addEventListener("DOMContentLoaded", () => {
     svg.addEventListener("click", (event) => {
-        if (validateR()) {
+        if (rValid) {
             let position = getMousePosition(svg, event);
-            x = position.x;
-            y = position.y;
-            // let k = 270 / r; //отношение радиуса и плоскости
-            x = ((x-150)*r/120).toFixed(3);
-            y = ((150-y)*r/120).toFixed(3);
-            console.log(x+' '+y);
+            xOld = xInput.value;
+            yOld = yInput.value;
+
+            xInput.value = position.x;
+            yInput.value = position.y;
+            xInput.value = ((xInput.value-150)*rInput/120).toFixed(3);
+            yInput.value = ((150-yInput.value)*rInput/120).toFixed(3);
+            graph = true;
             submitBtn.onclick(undefined);
-            setPointer(x, y);
         }
     });
 });
@@ -24,10 +26,16 @@ function getMousePosition(svg, event) {
     };
 }
 
+
 function setPointer(x, y) {
     console.log(x + " " + y);
     let pointer = document.getElementById("pointer");
     pointer.style.visibility = "visible";
-    pointer.setAttribute("cx", (x * 120) / r + 150);
-    pointer.setAttribute("cy", 150 - (y * 120) / r);
+    pointer.setAttribute("cx", (x * 120) / rInput + 150);
+    pointer.setAttribute("cy", 150 - (y * 120) / rInput);
+    if(graph){
+        xInput.value = xOld;
+        yInput.value = yOld;
+        graph = false;
+    }
 }

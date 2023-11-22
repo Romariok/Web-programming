@@ -79,25 +79,33 @@
 
         </div>
         <h:form id="form">
+            <label for="X">Изменение X</label>
+            <br/>
             <div class="checkboxes">
-                <label for="X">Изменение X</label>
-                <h:inputHidden id="X" name="x" value="#{myBean.currPoint.x}"/>
-                <h:selectManyCheckbox id="X-check" value="#{myBean.selectedItems}" valueChangeListener="#{myBean.handleSelectionChange}">
-                    <f:selectItems value="#{myBean.availableItems}" var="item" itemValue="#{item}" itemLabel="#{item}" />
+                <h:inputHidden id="X" name="x" value="#{myBean.currPoint.x}">
+                    <f:validator validatorId="validatorX"/>
+                </h:inputHidden>
+                <h:selectManyCheckbox id="X-check" value="#{myBean.selectedItems}"
+                                      valueChangeListener="#{myBean.handleSelectionChange}"
+                                      styleClass="checkboxesValues">
+                    <f:selectItems value="#{myBean.availableItems}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
                 </h:selectManyCheckbox>
             </div>
-
+            <br/>
 
             <div class="text_area">
                 <label for="Y">Изменение Y</label>
+                <br/>
                 <p:inputText type="number" required="required" id="Y" placeholder="-5 до 3" maxlength="15"
                              value="#{myBean.currPoint.y}">
+                    <f:validator validatorId="validatorY"/>
                 </p:inputText>
             </div>
 
             <div class="radio_buttons">
                 <label>Изменение R</label>
-                <h:selectOneRadio  value="#{myBean.currPoint.r}" id="R" onchange="reactToChangeRRadio(this.value)">
+
+                <h:selectOneRadio value="#{myBean.currPoint.r}" id="R" onchange="reactToChangeRRadio(this.value)" validator="validatorR">
                     <f:selectItem itemLabel="1" itemValue="1"/>
                     <f:selectItem itemLabel="1.5" itemValue="1.5"/>
                     <f:selectItem itemLabel="2" itemValue="2"/>

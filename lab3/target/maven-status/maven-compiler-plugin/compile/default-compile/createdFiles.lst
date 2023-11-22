@@ -1,8 +1,8 @@
 itmo\web\lab3\TimeCharger.class
-itmo\web\lab3\validators\ValidatorR.class
-itmo\web\lab3\validators\ValidatorX.class
 itmo\web\lab3\database\DataBase.class
+itmo\web\lab3\validator\ValidatorX.class
 itmo\web\lab3\database\DataBaseConnection.class
 itmo\web\lab3\Point.class
+itmo\web\lab3\validator\ValidatorR.class
+itmo\web\lab3\validator\ValidatorY.class
 itmo\web\lab3\Bean.class
-itmo\web\lab3\validators\ValidatorY.class

@@ -19,11 +19,11 @@
     margin: auto auto 3%;
     width: 90%;
 }
-/*#main__table th {*/
-/*    color: white;*/
-/*    background-color: #000720;*/
-/*}*/
-/* Страница */
+
+.checkboxesValues{
+    text-align: center;
+}
+
 body {
     background-color: rgb(245, 233, 219);
     min-height: 100vh;
@@ -93,6 +93,7 @@ svg, input{
 .text_area {
     padding: 3px;
     text-align: center;
+    display: inline-block;
 }
 .radio_buttons{
     display: flex;
