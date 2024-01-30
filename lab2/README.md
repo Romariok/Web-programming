@@ -1,5 +1,7 @@
 # Лабораторная работа 2, вариант 2251
-![](/lab2/docs/areas.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/Romariok/Web-Programming/main/lab2/docs/areas.png">
+</p>
 ## Задание
 Разработать веб-приложение на базе сервлетов и JSP, определяющее попадание точки на координатной плоскости в заданную область.
 
